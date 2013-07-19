@@ -1,0 +1,92 @@
+<%= form_for(@work_order, :html => { :id => "work_order_form", :class => "custom"}) do |f| %>
+  <% if @work_order.errors.any? %>
+    <div class="row">
+      <div class="twelve columns">
+          <label class="error"><%= pluralize(@work_order.errors.count, "error") %> prohibited this work_order from being saved: %></label>
+          <input type="text" class="error" />
+          <% @work_order.errors.full_messages.each do |msg| %>
+            <small class="error"><%= msg %></small>
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+    <%= hidden_field_tag 'property_id', @property.id %> 
+    <div class="row">
+      
+      <div class="six columns">
+        <fieldset>
+        <legend>When do you need snow moved?</legend>
+          <div class="row collapse">
+            <div class="nine columns">
+              <%= f.text_field :due_date, :value => Date.today.to_s,
+              :class => "prefix" %>
+            </div>
+            <div class="three columns">
+              <%= select_tag('due_time',
+                    options_for_select(
+                      [
+                        ['by 8AM', '08:00:00'],
+                        ['by 12PM', '12:00:00'],
+                        ['by 6PM', '18:00:00'],
+                        ['by 10PM','22:00:00']
+                      ]
+                  ) 
+                )
+                %> 
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+        <legend>Tell Us A Little More.</legend>
+        <div class="row collapse">
+          <div class = "six columns">
+            <span class="prefix">How much snow do you have?</span>
+          </div>
+          <div class="six columns">
+            <%= f.collection_select :snow_depth_id,
+            SnowDepth.order(:inches), :id, :name %>
+          </div>
+        </div>
+        <div class="row collapse">
+          <div class = "six columns">
+            <span class="prefix">How much should we do?</span>
+          </div>
+          <div class="six columns">
+            <%= f.collection_select :removal_preferences_id,
+            RemovalPreferences.order(:id), :id, :name , {}, {:class => "small" }%>
+          </div>
+        </div>
+        </fieldset>
+        <div class="row">
+          <div class="twelve columns">
+            <a class="button" href="javascript:adjust_price()">Get Price!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="six columns">
+        <ul class="pricing-table">
+          <li class="title"><%= @property.address %></li>
+          <li class="bullet-item" id="driveway_name"><%= "#{@property.driveway_type.name} (#{@property.driveway_length.name})" %></li>
+          <li class="bullet-item" id="sidewalk_name"><%= "Sidewalks #{@property.sidewalk_length.name}" %></li>
+          <li class="bullet-item" id="price_table_snow_depth">Show Is 6 Inches</li>
+          <li class="bullet-item" id="price_table_removal_preference">Driveway Only</li>
+          <li class="bullet-item" id="price_table_deice_sidewalk">De-Ice Sidewalks</li>
+          <li class="price" id="price_table_price">$0.0</li>
+          <li class="cta-button" id="price_table_button"><a class="button" href="javascript:schedule_it()">Schedule It!</a></li>
+          <li>
+        </ul>
+      </div>
+    </div>
+    <%= f.text_field :price, :style => "display:none"%>
+    <%= hidden_field_tag 'driveway_type_id', @property.driveway_type.id %>
+    <%= hidden_field_tag 'driveway_length', @property.driveway_length.feet %>
+    <%= hidden_field_tag 'sidewalk_length', @property.sidewalk_length.feet %>
+<% end %>
+<%= javascript_include_tag "/javascripts/work_order_actions.js" %>
+<script>
+  $(document).ready(function(){
+    adjust_price();
+  });
+</script>
+

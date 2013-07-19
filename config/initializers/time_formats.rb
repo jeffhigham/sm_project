@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:due_date] = "%a, %B %d before %I:%M %p"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  property_id: MyString
+  integer: MyString
+  name: MyString
+  width: 1
+
+two:
+  property_id: MyString
+  integer: MyString
+  name: MyString
+  width: 1

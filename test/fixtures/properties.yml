@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  address: MyString
+  driveway_type=string: MyString
+  driveway_length=integer: MyString
+  sidewalk_length: 1
+  profile_photo: MyString
+
+two:
+  address: MyString
+  driveway_type=string: MyString
+  driveway_length=integer: MyString
+  sidewalk_length: 1
+  profile_photo: MyString

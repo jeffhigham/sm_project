@@ -1,0 +1,15 @@
+<div class="row">
+  <% flash.each do |name, msg| -%>
+    <div class="large-6 columns">
+        <label class="error"><%= name.capitalize %></label>
+        <input type="text" class="error" />
+        <small class="error"><%= msg %></small>
+    </div>
+  <% end %>
+</div>
+<div class="row">
+	<div class="small-12 columns">
+		<h1>New Address</h1>
+		<%= render 'form' %>
+	</div>
+</div>

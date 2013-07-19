@@ -1,0 +1,74 @@
+<%= form_for @customer, :html => {  :class => "custom", :id => "edit_customer" } do |f| %>
+  
+  <% if @customer.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @customer.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+<!-- form -->
+
+<div class="row">
+  <div class="large-6 columns">
+  <fieldset>
+    <legend>Profile Photo</legend>
+    <div class="row">
+    <div class="large-12 columns">
+      <%= image_tag "/images/blank_avatar.jpeg" %>
+    </div>
+    </div>
+    <div class="row">
+      <div class="large-12 columns">
+        <%= f.file_field :profile_photo, :html => {} %>
+      </div>
+    </div>
+  </fieldset>
+  </div>
+  <div class="large-6 columns">
+    <fieldset>
+    <legend>Account Information</legend>
+      <div class="row">
+        <div class="large-12 columns">
+        <%= f.label :email %>
+        <%= f.text_field :email %>
+        <div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+        <%= f.label :password %>
+        <%= f.password_field :password %>
+        <div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation %>
+        <div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+        <%= f.label :home_phone %>
+        <%= f.text_field :home_phone %>
+        <div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+        <%= f.label :mobile_phone %>
+        <%= f.text_field :mobile_phone %>
+        <div>
+      </div>
+    </fieldset>
+  </div>
+</div>
+
+<div class="row">
+  <div class="large-12 columns">
+    <%= link_to 'Save', "javascript:$('#edit_customer').submit()", :class=> "button" %>
+  </div>
+</div>
+
+<% end %>

@@ -1,0 +1,40 @@
+<h2><%= "#{@property.address} (#{@property.latitude} #{@property.longitude})" %></h2>
+
+<p id="notice"><%= notice %></p>
+<%= image_tag 'http://placehold.it/400x300&text=House' %>
+<%= gmaps("markers" => {"data" => @markers }, :map_options => {type: "HYBRID", auto_zoom: false, zoom: 19}) %>
+<p>
+  <b>Primary Address:</b>
+  <%= @property.primary %>
+</p>
+<p>
+  <b>Driveway type:</b>
+  <%= @driveway_type %>
+</p>
+
+<p>
+  <b>Driveway length:</b>
+  <%= @driveway_length %>
+</p>
+
+<p>
+  <b>Sidewalk length:</b>
+  <%= @sidewalk_length %>
+</p>
+<p>
+	<b>Notes</b>
+	<%= @property.notes %>
+</p>
+
+<%= link_to 'Edit', edit_property_path(@property) %> |
+<%= link_to 'Back', properties_path %>
+
+<h2>Snow Removal Requests</h2>
+<% @work_orders.each do |work_order| %>
+<div>
+  <%= link_to "#{work_order.due_date} #{work_order.completed_date}", property_work_order_path(work_order) %>
+<div>
+<% end %>
+<p>
+<%= link_to 'Move My Snow! ', new_property_work_order_path(@property) %>
+<%= yield :scripts %>

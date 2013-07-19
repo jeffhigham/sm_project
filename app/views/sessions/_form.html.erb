@@ -1,0 +1,41 @@
+
+<div class="row">
+  <% flash.each do |name, msg| -%>
+    <div class="large-6 columns">
+        <label class="error"><%= name.capitalize %></label>
+        <input type="text" class="error" />
+        <small class="error"><%= msg %></small>
+    </div>
+  <% end %>
+</div>
+<%= form_tag(sessions_path, :id => "login") do %>
+<div class="row">
+  <div class="three columns"></div>
+  <div class="six  columns">
+
+    <fieldset>
+      <legend>Log In</legend>
+      <div class="row">
+        <div class="large-12 columns">
+                <%= label_tag :email %>
+                <%= text_field_tag :email, params[:email] %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+                <%= label_tag :password %>
+                <%= password_field_tag :password %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="large-12 columns">
+        <%= link_to "Log In", "javascript:$('#login').submit()", :class => "button" %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <div class="three columns"></div>
+</div>
+<% end %>

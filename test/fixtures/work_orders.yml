@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  property_id: 1
+  due_date: 2013-06-27
+  completed_date: 2013-06-27
+  heavy_snow: false
+  invliced: false
+  paid: false
+  discount: 1
+  driveway_only: false
+  salt_on_walk: false
+  notify: false
+  before_photo: MyString
+  after_photo: MyString
+
+two:
+  property_id: 1
+  due_date: 2013-06-27
+  completed_date: 2013-06-27
+  heavy_snow: false
+  invliced: false
+  paid: false
+  discount: 1
+  driveway_only: false
+  salt_on_walk: false
+  notify: false
+  before_photo: MyString
+  after_photo: MyString

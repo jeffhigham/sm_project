@@ -1,0 +1,37 @@
+<div class="row">
+	<div class="twelve columns"></div>
+		<% @properties.each do |property| %>
+			<table>
+				<tr>
+					<th>Location</td>
+					<th>Due Date</td>
+					<th>Price</td>
+					<th>&nbsp;</td>
+					<th>&nbsp;</td>
+				</tr>
+				<% property.work_orders.each do |work_order| %>
+					<tr>
+						<td><%= property.address %></td>
+						<td><%= work_order.due_date_f %></td>
+						<td>$<%=work_order.price %></td>
+						<td><form method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" class="paypal-button" target="_top" id="paypal-form" style="display:none">
+							<input type="hidden" name="button" value="buynow">
+							<input type="hidden" name="item_name" value="Move My Snow -
+							(<%= property.address %>) - 
+							(<%= work_order.due_date_f%>) -
+							(<%= property.driveway_type.name %>)">
+							<input type="hidden" name="item_number" value="<%= work_order.id %>">
+							<input type="hidden" name="amount" value="<%= work_order.price %>">
+							<input type="hidden" name="env" value="www.sandbox">
+							<input type="hidden" name="cmd" value="_xclick">
+							<input type="hidden" name="business" value="jeffhigham@gmail.com">
+							</form>
+							<%= link_to 'Pay Now (PayPal)', "javascript:$('#paypal-form').submit()", :class => "button" %>
+						</td>
+						<td><%= link_to 'Cancel', work_order, method: :delete, data: { confirm: 'Cancel snow removal request?' }, :class => "button" %></td>
+					</tr>
+				<% end %>
+			</table>
+		<% end %>
+	</div>
+</div>

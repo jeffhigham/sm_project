@@ -1,0 +1,120 @@
+<div class="row">
+  <div class="twelve columns">
+    <div class="row">
+
+      <!-- photo and address container -->
+      <div class="large-4 columns">
+        <!-- <%= image_tag("http://placehold.it/300x300&text=[House Map]") %> -->
+        <%= gmaps("markers" => {"data" => @markers }, :map_options => {type: "HYBRID", auto_zoom: false, zoom: 19}) %>
+      
+        <div class="hide-for-small panel">
+          <h4><%= @work_order.property.address %></h4>
+          <h5 class="subheader"><%= 
+            "#{@work_order.property.city}, #{@work_order.property.state} #{@work_order.property.zip} #{@work_order.property.customer.home_phone} " 
+            %></h5>
+        </div>
+        
+      </div>
+      
+      <!-- order details container -->
+      <div class="large-8 columns">
+        <div class="row">
+          <div class="twelve columns">
+
+            <ul class="pricing-table">
+              <li class="title">Order Summary</li>
+              <li class="bullet-item"><%= @work_order.due_date_f %></li>
+              <li class="bullet-item"><%= @work_order.property.driveway_type.name %></li>
+              <li class="bullet-item"><%= @work_order.removal_preferences.name %> </li>
+              <li class="bullet-item">Driveway <%= @work_order.property.driveway_length.name %></li>
+              <li class="bullet-item">Sidewalk <%= @work_order.property.sidewalk_length.name %></li>
+              <li class="bullet-item">Snow Depth <%= @work_order.snow_depth.name %></li>
+              <li class="price" id="price_table_price">$<%= @work_order.price.round() %></li>
+            </ul>
+            <a href="javascript:$('#paypal-form').submit()">
+              <div class="panel callout radius">
+                <h5>Complete Your Order!</h5>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+  </div>
+
+<!--
+  https://www.paypal.com/cgi-bin/webscr?cmd=p/pdn/howto_checkout-outside
+-->
+  <form id="paypal-form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" style="display:none">
+    <input type="hidden" name="business" value="store1@movemysnow.pro">
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="upload" value="1">
+    <input type="hidden" name="return" value="<%= property_work_order_url(@work_order.property,@work_order.id) %>">
+    <input type="hidden" name="invoice" value="<%= @work_order.id %>">
+    <input type="hidden" name="notify_url" value="http://movemysnow.pro/payment_notifications">
+
+    <input type="hidden" name="item_name_1" value="3-Car Driveway (30 feet)">
+    <input type="hidden" name="amount_1" value="31.00">
+    <input type="hidden" name="item_number_1" value="1">
+    <input type="hidden" name="quantity_1" value="1">
+
+    <input type="hidden" name="item_name_2" value="De-Ice Walks">
+    <input type="hidden" name="amount_2" value="2.00">
+    <input type="hidden" name="item_number_2" value="2">
+    <input type="hidden" name="quantity_2" value="1">
+
+    <input type="hidden" name="item_name_3" value="Over 18 Inches Of Snow">
+    <input type="hidden" name="amount_3" value="5.20">
+    <input type="hidden" name="item_number_3" value="3">
+    <input type="hidden" name="quantity_3" value="1">
+
+  </form>
+</div>
+<%= yield :scripts %>
+
+  <!--
+      <table>
+        <tr>
+          <th>Location</td>
+          <th>Due Date</td>
+          <th>Price</td>
+          <th>&nbsp;</td>
+          <th>&nbsp;</td>
+        </tr>
+          <tr>
+            <td><%= @work_order.property.address %></td>
+            <td><%= @work_order.due_date_f %></td>
+            <td>$<%=@work_order.price %></td>
+            <% if @work_order.paid.nil? %>
+              <td>
+                <form id="paypal-form" method="post" action="https://www.sandbox.paypal.com/cgi-bin/webscr" style="display:none">
+                <input type="hidden" name="business" value="store@movemysnow.pro">
+                <input type="hidden" name="cmd" value="_cart">
+                <input type="hidden" name="upload" value="1">
+                <input type="hidden" name="return" value="<%= property_work_order_url(@work_order.property,@work_order.id) %>">
+                <input type="hidden" name="invoice" value="<%= @work_order.id %>">
+                <input type="hidden" name="notify_url" value="http://www.movemysnow.pro">
+
+                <input type="hidden" name="item_name_1" value="3-Car Driveway (30 feet)">
+                <input type="hidden" name="amount_1" value="31.00">
+                <input type="hidden" name="item_number_1" value="1">
+                <input type="hidden" name="quantity_1" value="1">
+
+                <input type="hidden" name="item_name_2" value="De-Ice Walks">
+                <input type="hidden" name="amount_2" value="2.00">
+                <input type="hidden" name="item_number_2" value="2">
+                <input type="hidden" name="quantity_2" value="1">
+
+                <input type="hidden" name="item_name_3" value="Over 18 Inches Of Snow">
+                <input type="hidden" name="amount_3" value="5.20">
+                <input type="hidden" name="item_number_3" value="3">
+                <input type="hidden" name="quantity_3" value="1">
+
+                </form>
+                <%= link_to 'Pay Now (PayPal)', "javascript:$('#paypal-form').submit()", :class => "button" %>
+              </td>
+            <% end %>
+            <td><%= link_to 'Cancel', @work_order, method: :delete, data: { confirm: 'Cancel snow removal request?' }, :class => "button" %></td>
+          </tr>
+      </table>
+  </div>
+-->
