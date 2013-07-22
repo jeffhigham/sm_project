@@ -10,11 +10,24 @@
 // WARNING: THE FIRST BLANK LINE MARKS THE END OF WHAT'S TO BE PROCESSED, ANY BLANK LINE SHOULD
 // GO AFTER THE REQUIRES BELOW.
 //
-//
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.datepicker
-//= require foundation
-//= require_tree .
+// =require foundation/foundation
+// =require foundation/foundation.alerts
+// =require foundation/foundation.clearing
+// =require foundation/foundation.cookie
+// =require foundation/foundation.dropdown
+// =require foundation/foundation.forms
+// =require foundation/foundation.joyride
+// =require foundation/foundation.magellan
+// =require foundation/foundation.orbit
+// =require foundation/foundation.reveal
+// =require foundation/foundation.section
+// =require foundation/foundation.tooltips
+// =require foundation/foundation.topbar
+// =require foundation/foundation.interchange
+// =require foundation/foundation.placeholder
+// =require foundation/foundation.abide
+//= require_directory .
 
 $(function(){ $(document).foundation(); });

@@ -18,7 +18,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'zurb-foundation'
+  gem 'zurb-foundation', '>=4.3.0'
 end
 
 gem 'jquery-rails'
@@ -41,4 +41,3 @@ gem 'bcrypt-ruby', '~> 3.0.0'
 
 gem "paperclip", "~> 3.0"
 gem "gmaps4rails"
-gem "zurb-foundation"
